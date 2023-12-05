@@ -1,96 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante Jandrisin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('https://static.vecteezy.com/system/resources/previews/001/900/914/non_2x/blurred-restaurant-scene-with-empty-tabletop-free-photo.jpg'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la ruta de tu imagen */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        header {
-            background-image: url('https://fohfurniture.com/wp-content/uploads/2023/09/FOH-TTCC008-cherry-colored-butchered-blook-real-wood.jpg.webp'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la ruta de tu imagen */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;color: white;
-            padding: 1em;
-            text-align: center;
-        }
-
-        nav {
-            background-color: rgba(250, 1, 1, 0.8);
-            color: white;
-            text-align: center;
-            padding: 1em;
-        }
-
-        section {
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* RGBA se utiliza para especificar el color con un valor de opacidad (0.8 en este caso) */
-            border-radius: 10px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Formulario</title>
 </head>
 <body>
 
-    <header>
-        <h1>Restaurante Jandrisin</h1>
-        <p>¡Disfruta de una experiencia culinaria única!</p>
-    </header>
+<h2>Formulario de Contacto</h2>
 
-    <nav>
-        <a href="#sobre-nosotros">Sobre Nosotros</a> |
-        <a href="#menu">Menú</a> |
-        <a href="#reservas">Reservas</a> |
-        <a href="#contacto">Contacto</a>
-    </nav>
+<form id="crud-form" action="">
+    <label for="">nombre:</label>
+    <input type="text" id="nombre">
+    <label for="">edad:</label>
+    <input type="number" id="edad">
+    <button type="button" onclick="crearRegistro">crear</button>
+</form>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"; 
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAmZ4LI7OzG6vA4fgYBePgUbdCKfuvxBlk",
+      authDomain: "conexion-943da.firebaseapp.com",
+      databaseURL: "https://conexion-943da-default-rtdb.firebaseio.com",
+      projectId: "conexion-943da",
+      storageBucket: "conexion-943da.appspot.com",
+      messagingSenderId: "90019467281",
+      appId: "1:90019467281:web:2fc64d19c7622f985821b0",
+      measurementId: "G-LLG3VMV4RQ"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-    <section id="sobre-nosotros">
-        <h2>Sobre Nosotros</h2>
-        <p>Restaurante Delicioso es un lugar donde la pasión por la buena comida se encuentra con un ambiente acogedor. Nuestro equipo de chefs expertos se esfuerza por ofrecer platos deliciosos y memorables.</p>
-    </section>
+    window.crearRegistro = function(){
+        const nombre = document.getElementById("nombre").value;
+        const edad = document.getElementById("edad").value;
+        console.log(nombre, edad);
 
-    <section id="menu">
-        <h2>Menú</h2>
-        <p>Nuestro menú presenta una variedad de platos exquisitos, desde entradas hasta postres. Utilizamos ingredientes frescos y de alta calidad para garantizar una experiencia gastronómica excepcional.</p>
-        <h3>Platos Destacados</h3>
-        <ul>
-            <li>Churrasco</li>
-            <li>Fritada</li>
-            <li>Hamburguesa</li>
-        </ul>
-    </section>
+        push(
+            ref(database, 'septimo'), 
+            {
+                name: nombre,
+                age: edad
+            }
+        );
+    }
 
-    <section id="reservas">
-        <h2>Reservas</h2>
-        <p>Realiza una reserva para garantizar tu lugar en nuestro restaurante. ¡Esperamos poder atenderte y brindarte una experiencia inolvidable!</p>
-        <p>Para hacer una reserva, llama al 0995234311 o utiliza nuestro sistema de reserva en línea.</p>
-    </section>
-
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Estamos ubicados en Latacunga-Cotopaxi. Para consultas y más información, contáctanos a través del correo electrónico: info@restaurantedelicioso.com</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 Restaurante Delicioso. Todos los derechos reservados.</p>
-    </footer>
+  </script>
 
 </body>
 </html>
