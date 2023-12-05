@@ -1,51 +1,96 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Perfil Personal</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-        <header>
-            <a href="#" class="Univerdidad Tecnica de Cotopaxi">Univerdidad Tecnica de Cotopaxi</a>
-            <ul>
-                <li><a href="#" class="active">Inicio</a></li>
-                <li><a href="integrantes.html">Integrantes</a></li>
-            </ul>  
-        </header>
-        <section>
-            <img src="imagen/stars.png" id="stars">
-            <img src="imagen/moon.png"   id="moon">
-            <img src="imagen/mountains_behind.png" id="mountains_behind"> 
-            <h2 id="text">INFORMACION</h2>
-            <a href="#sec" id="btn">Explorar</a>
-            <img src="imagen/mountains_front.png" id="mountains_front"> 
-        </section>
-        <div class="sec" id="sec">
-            <h2>Por qué se realizó esta Página</h2>
-            <p>Se realizó para poder aprender cómo se despliega una página web. Aquí mostraremos los integrantes que la conforman, así como información breve sobre ellos. Investigamos y exploramos la importancia de una buena presentación.<br><br>
-            Todos los seres humanos proyectamos una imagen frente a los demás, que comienza a formarse a partir de nuestro aspecto físico, se fortalece con todo aquello que dejamos ver de nosotros y se consolida con lo que los demás perciben. La imagen personal habla por nosotros. Si consideramos importante al cliente, al proveedor o a cualquier persona, seguramente quedará demostrado presentándonos con buen porte y apariencia. En cambio, si restamos importancia a su presencia, no nos importaría llegar a una reunión en bata de baño. Así, la apariencia que proyectamos es más que una imagen visual, es un verdadero elemento de comunicación que podemos emplear a nuestro favor.<br><br>
-            </p>
-        </div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Jandrisin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/001/900/914/non_2x/blurred-restaurant-scene-with-empty-tabletop-free-photo.jpg'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-        <script>
-          window.addEventListener('scroll', function(){
-              let stars = document.getElementById('stars');
-              let moon = document.getElementById('moon');
-              let mountains_behind = document.getElementById('mountains_behind');
-              let text = document.getElementById('text');
-              let btn = document.getElementById('btn');
-              let mountains_front = document.getElementById('mountains_front');
-              let header = document.querySelector('header');
+        header {
+            background-image: url('https://fohfurniture.com/wp-content/uploads/2023/09/FOH-TTCC008-cherry-colored-butchered-blook-real-wood.jpg.webp'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;color: white;
+            padding: 1em;
+            text-align: center;
+        }
 
-              let value = window.scrollY;
-              stars.style.left = value * 0.25 + 'px';
-              moon.style.top = value * 1.05 + 'px';
-              mountains_behind.style.top = value * 0.05 + 'px';
-              mountains_front.style.top = value * 0 + 'px';
-              text.style.marginRight = value * 4 + 'px';
-              header.style.top = value * 0.05 + 'px';
-          })
+        nav {
+            background-color: rgba(250, 1, 1, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
 
-        </script>
-    </body>
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* RGBA se utiliza para especificar el color con un valor de opacidad (0.8 en este caso) */
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Restaurante Jandrisin</h1>
+        <p>¡Disfruta de una experiencia culinaria única!</p>
+    </header>
+
+    <nav>
+        <a href="#sobre-nosotros">Sobre Nosotros</a> |
+        <a href="#menu">Menú</a> |
+        <a href="#reservas">Reservas</a> |
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <section id="sobre-nosotros">
+        <h2>Sobre Nosotros</h2>
+        <p>Restaurante Delicioso es un lugar donde la pasión por la buena comida se encuentra con un ambiente acogedor. Nuestro equipo de chefs expertos se esfuerza por ofrecer platos deliciosos y memorables.</p>
+    </section>
+
+    <section id="menu">
+        <h2>Menú</h2>
+        <p>Nuestro menú presenta una variedad de platos exquisitos, desde entradas hasta postres. Utilizamos ingredientes frescos y de alta calidad para garantizar una experiencia gastronómica excepcional.</p>
+        <h3>Platos Destacados</h3>
+        <ul>
+            <li>Churrasco</li>
+            <li>Fritada</li>
+            <li>Hamburguesa</li>
+        </ul>
+    </section>
+
+    <section id="reservas">
+        <h2>Reservas</h2>
+        <p>Realiza una reserva para garantizar tu lugar en nuestro restaurante. ¡Esperamos poder atenderte y brindarte una experiencia inolvidable!</p>
+        <p>Para hacer una reserva, llama al 0995234311 o utiliza nuestro sistema de reserva en línea.</p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Estamos ubicados en Latacunga-Cotopaxi. Para consultas y más información, contáctanos a través del correo electrónico: info@restaurantedelicioso.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Restaurante Delicioso. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
 </html>
