@@ -34,7 +34,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-
+        function crearRegistro(){
             window.crearRegistro = function () {
                 const nombre = document.getElementById("nombre").value;
                 const edad = document.getElementById("edad").value;
@@ -49,6 +49,7 @@
                 );
 
             }
+        }
           </script>
     </body>
 </html>
