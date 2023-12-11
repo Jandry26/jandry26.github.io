@@ -120,12 +120,12 @@
         }
 
         window.eliminarRegistro = function (cedula) {
-            remove(ref(database, 'practica/' + cedula));
+            remove(ref(database, 'autos/' + cedula));
 
             limpiarFormulario();
         }
 
-        onValue(ref(database, 'conexion'), (snapshot) => {
+        onValue(ref(database, 'autos'), (snapshot) => {
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = "";
 
