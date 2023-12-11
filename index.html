@@ -8,8 +8,10 @@
             <input type="text" id = "nombre">
             <label for="edad">Edad:</label>
             <input type="number" id = "edad">
-            <button type="button" onclick="crearRegistro()"> Crear </button>
-        </form>
+            <button type="button" onclick="crearRegistro()">Crear</button>
+            <input type="submit" onclick="crearRegistro()" value="Enviar">
+
+    </form>
 
         <script type="module">
         // Import the functions you need from the SDKs you need
@@ -34,7 +36,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-        function crearRegistro(){
+
             window.crearRegistro = function () {
                 const nombre = document.getElementById("nombre").value;
                 const edad = document.getElementById("edad").value;
@@ -49,7 +51,6 @@
                 );
 
             }
-        }
           </script>
     </body>
 </html>
