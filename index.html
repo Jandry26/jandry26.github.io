@@ -102,7 +102,7 @@
 
         window.actualizarRegistro = function (cedula) {
             const updates = {};
-            updates['/practica/' + cedula] = {
+            updates['/conexion/' + cedula] = {
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
                 cedula: cedulaInput.value,
@@ -120,7 +120,7 @@
             limpiarFormulario();
         }
 
-        onValue(ref(database, 'autos'), (snapshot) => {
+        onValue(ref(database, 'conexion'), (snapshot) => {
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = "";
 
