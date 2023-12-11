@@ -16,8 +16,6 @@
         <input type="text" id="cedula" required>
         <label for="email">Email:</label>
         <input type="email" id="email" required>
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" required>
         <button type="button" onclick="crearOActualizarRegistro()">Guardar</button>
         <button type="button" onclick="limpiarFormulario()">Limpiar</button>
     </form>
@@ -31,7 +29,6 @@
                 <th>Apellido</th>
                 <th>Cedula</th>
                 <th>Email</th>
-                <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -69,16 +66,15 @@
         const apellidoInput = document.getElementById("apellido");
         const cedulaInput = document.getElementById("cedula");
         const emailInput = document.getElementById("email");
-        const fechaInput = document.getElementById("fecha");
+
 
         window.crearOActualizarRegistro = function () {
             const nombre = nombreInput.value;
             const apellido = apellidoInput.value;
             const cedula = cedulaInput.value;
             const email = emailInput.value;
-            const fecha = fechaInput.value;
 
-            if (nombre && apellido && cedula && email && fecha) {
+            if (nombre && apellido && cedula && email) {
                 const cedulaExistente = document.getElementById("cedula-existente");
 
                 if (cedulaExistente) {
@@ -97,8 +93,7 @@
                     name: nombreInput.value,
                     apellido: apellidoInput.value,
                     cedula: cedulaInput.value,
-                    email: emailInput.value,
-                    date: fechaInput.value
+                    email: emailInput.value
                 }
             );
 
@@ -111,8 +106,7 @@
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
                 cedula: cedulaInput.value,
-                email: emailInput.value,
-                date: fechaInput.value
+                email: emailInput.value
             };
 
             update(ref(database), updates);
@@ -138,9 +132,8 @@
                     <td>${data.apellido}</td>
                     <td>${data.cedula}</td>
                     <td>${data.email}</td>
-                    <td>${data.date}</td>
                     <td>
-                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.cedula}', '${data.email}', '${data.date}')">Actualizar</button>
+                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.cedula}', '${data.email}')">Actualizar</button>
                         <button onclick="eliminarRegistro('${data.cedula}')">Eliminar</button>
                     </td>
                 `;
@@ -153,7 +146,6 @@
             apellidoInput.value = apellido;
             cedulaInput.value = cedula;
             emailInput.value = email;
-            fechaInput.value = fecha;
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Actualizar";
@@ -167,7 +159,6 @@
             apellidoInput.value = "";
             cedulaInput.value = "";
             emailInput.value = "";
-            fechaInput.value = "";
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Guardar";
