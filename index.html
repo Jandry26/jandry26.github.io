@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <title>Formulario CRUD</title>
+    <title>CRUD Bryan Sanchez</title>
 </head>
 
 <body>
-    <h1>Formulario</h1>
+    <h1>CRUD Bryan Sanchez</h1>
     <form id="crud-form">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" required>
@@ -16,6 +16,8 @@
         <input type="text" id="cedula" required>
         <label for="email">Email:</label>
         <input type="email" id="email" required>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" required>
         <button type="button" onclick="crearOActualizarRegistro()">Guardar</button>
         <button type="button" onclick="limpiarFormulario()">Limpiar</button>
     </form>
@@ -29,6 +31,7 @@
                 <th>Apellido</th>
                 <th>Cedula</th>
                 <th>Email</th>
+                <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -38,43 +41,37 @@
     </table>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        import { getDatabase, ref, push, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        
         const firebaseConfig = {
-          apiKey: "AIzaSyAgSieoDstXWj59z5aLGvuHjL2HRgViw9Y",
-          authDomain: "autos-ee1c0.firebaseapp.com",
-          databaseURL: "https://autos-ee1c0-default-rtdb.firebaseio.com",
-          projectId: "autos-ee1c0",
-          storageBucket: "autos-ee1c0.appspot.com",
-          messagingSenderId: "754821097484",
-          appId: "1:754821097484:web:26b60ba4b5837f9798a629",
-          measurementId: "G-W0BD6D67YD"
+            apiKey: "AIzaSyAgSieoDstXWj59z5aLGvuHjL2HRgViw9Y",
+            authDomain: "autos-ee1c0.firebaseapp.com",
+            databaseURL: "https://autos-ee1c0-default-rtdb.firebaseio.com",
+            projectId: "autos-ee1c0",
+            storageBucket: "autos-ee1c0.appspot.com",
+            messagingSenderId: "754821097484",
+            appId: "1:754821097484:web:26b60ba4b5837f9798a629",
+            measurementId: "G-W0BD6D67YD"
         };
-      
-        // Initialize Firebase
+
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const database = getDatabase();
+        const database = getDatabase(app);
+
         const nombreInput = document.getElementById("nombre");
         const apellidoInput = document.getElementById("apellido");
         const cedulaInput = document.getElementById("cedula");
         const emailInput = document.getElementById("email");
-
+        const fechaInput = document.getElementById("fecha");
 
         window.crearOActualizarRegistro = function () {
             const nombre = nombreInput.value;
             const apellido = apellidoInput.value;
             const cedula = cedulaInput.value;
             const email = emailInput.value;
+            const fecha = fechaInput.value;
 
-            if (nombre && apellido && cedula && email) {
+            if (nombre && apellido && cedula && email && fecha) {
                 const cedulaExistente = document.getElementById("cedula-existente");
 
                 if (cedulaExistente) {
@@ -88,12 +85,14 @@
         }
 
         function crearRegistro() {
-            push(ref(database, 'conexion'),
+            push(
+                ref(database, 'autos'),
                 {
                     name: nombreInput.value,
                     apellido: apellidoInput.value,
                     cedula: cedulaInput.value,
-                    email: emailInput.value
+                    email: emailInput.value,
+                    date: fechaInput.value
                 }
             );
 
@@ -102,11 +101,12 @@
 
         window.actualizarRegistro = function (cedula) {
             const updates = {};
-            updates['/conexion/' + cedula] = {
+            updates['/autos/' + cedula] = {
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
                 cedula: cedulaInput.value,
-                email: emailInput.value
+                email: emailInput.value,
+                date: fechaInput.value
             };
 
             update(ref(database), updates);
@@ -120,7 +120,7 @@
             limpiarFormulario();
         }
 
-        onValue(ref(database, 'conexion'), (snapshot) => {
+        onValue(ref(database, 'autos'), (snapshot) => {
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = "";
 
@@ -132,8 +132,9 @@
                     <td>${data.apellido}</td>
                     <td>${data.cedula}</td>
                     <td>${data.email}</td>
+                    <td>${data.date}</td>
                     <td>
-                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.cedula}', '${data.email}')">Actualizar</button>
+                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.cedula}', '${data.email}', '${data.date}')">Actualizar</button>
                         <button onclick="eliminarRegistro('${data.cedula}')">Eliminar</button>
                     </td>
                 `;
@@ -146,6 +147,7 @@
             apellidoInput.value = apellido;
             cedulaInput.value = cedula;
             emailInput.value = email;
+            fechaInput.value = fecha;
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Actualizar";
@@ -159,6 +161,7 @@
             apellidoInput.value = "";
             cedulaInput.value = "";
             emailInput.value = "";
+            fechaInput.value = "";
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Guardar";
