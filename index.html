@@ -40,23 +40,42 @@
         </tbody>
     </table>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, push, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyAgSieoDstXWj59z5aLGvuHjL2HRgViw9Y",
-            authDomain: "autos-ee1c0.firebaseapp.com",
-            databaseURL: "https://autos-ee1c0-default-rtdb.firebaseio.com",
-            projectId: "autos-ee1c0",
-            storageBucket: "autos-ee1c0.appspot.com",
-            messagingSenderId: "754821097484",
-            appId: "1:754821097484:web:26b60ba4b5837f9798a629",
-            measurementId: "G-W0BD6D67YD"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+    <html>
+        <head>
+    
+        </head>
+        <body>
+            <form id="crud-form">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id = "nombre">
+                <label for="edad">Edad:</label>
+                <input type="number" id = "edad">
+                <button type="button" onclick="crearRegistro()">Crear</button>
+            </form>
+    
+    
+            <script type="module">
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+                import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+              
+                // Your web app's Firebase configuration
+                const firebaseConfig = {
+                  apiKey: "AIzaSyBMJsVpnbOwVOiVNbTZScZdet9qlGigDL0",
+                  authDomain: "conexion-8ec0d.firebaseapp.com",
+                  databaseURL: "https://conexion-8ec0d-default-rtdb.firebaseio.com",
+                  projectId: "conexion-8ec0d",
+                  storageBucket: "conexion-8ec0d.appspot.com",
+                  messagingSenderId: "679910299749",
+                  appId: "1:679910299749:web:9800b464879628b4850e8c"
+                };
+              
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const database = getDatabase(app);
+    
 
         const nombreInput = document.getElementById("nombre");
         const apellidoInput = document.getElementById("apellido");
@@ -101,7 +120,7 @@
 
         window.actualizarRegistro = function (celular) {
             const updates = {};
-            updates['guanoluisa/' + celular] = {
+            updates['/guanoluisa/' + celular] = {
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
                 celular: celularInput.value,
