@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1>Jandry Guanoluisa</h1>
+    <h1>Jandry Guanoluisa Quito</h1>
     <form id="crud-form">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" required>
@@ -58,7 +58,6 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-
         const nombreInput = document.getElementById("nombre");
         const apellidoInput = document.getElementById("apellido");
         const celularInput = document.getElementById("celular");
@@ -73,10 +72,10 @@
             const fecha = fechaInput.value;
 
             if (nombre && apellido && celular && estadocivil && fecha) {
-                const celularExistente = document.getElementById("celular-existente");
+                const celularExistente = celularInput.getAttribute("data-celular");
 
                 if (celularExistente) {
-                    actualizarRegistro(celularExistente.value);
+                    actualizarRegistro(celularExistente);
                 } else {
                     crearRegistro();
                 }
@@ -150,6 +149,9 @@
             estadocivilInput.value = estadocivil;
             fechaInput.value = fecha;
 
+            // Setear el atributo data-celular para referencia
+            celularInput.setAttribute("data-celular", celular);
+
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Actualizar";
             crearButton.onclick = function () {
@@ -163,6 +165,9 @@
             celularInput.value = "";
             estadocivilInput.value = "";
             fechaInput.value = "";
+
+            // Limpiar el atributo data-celular
+            celularInput.removeAttribute("data-celular");
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Guardar";
