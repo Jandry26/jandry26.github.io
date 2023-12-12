@@ -90,7 +90,7 @@
                 {
                     name: nombreInput.value,
                     apellido: apellidoInput.value,
-                    cedula: celularInput.value,
+                    celular: celularInput.value,
                     estadocivil: estadocivilInput.value,
                     date: fechaInput.value
                 }
@@ -99,7 +99,7 @@
             limpiarFormulario();
         }
 
-        window.actualizarRegistro = function (cedula) {
+        window.actualizarRegistro = function (celular) {
             const updates = {};
             updates['/guanoluisa-jandry/' + celular] = {
                 name: nombreInput.value,
