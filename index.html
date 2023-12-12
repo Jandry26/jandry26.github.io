@@ -12,10 +12,10 @@
         <input type="text" id="nombre" required>
         <label for="apellido">Apellido:</label>
         <input type="text" id="apellido" required>
-        <label for="cedula">Cedula:</label>
-        <input type="text" id="cedula" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
+        <label for="celular">Celular:</label>
+        <input type="text" id="celular" required>
+        <label for="estadocivil">Estado-civil:</label>
+        <input type="text" id="estadocivil" required>
         <label for="fecha">Fecha:</label>
         <input type="date" id="fecha" required>
         <button type="button" onclick="crearOActualizarRegistro()">Guardar</button>
@@ -24,13 +24,13 @@
 
     <br>
 
-    <table border="1">
+    <table border="2">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Cedula</th>
-                <th>Email</th>
+                <th>Celular</th>
+                <th>Estado-civil/th>
                 <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
@@ -60,22 +60,22 @@
 
         const nombreInput = document.getElementById("nombre");
         const apellidoInput = document.getElementById("apellido");
-        const cedulaInput = document.getElementById("cedula");
-        const emailInput = document.getElementById("email");
+        const celularInput = document.getElementById("celular");
+        const estadocivilInput = document.getElementById("estadocivil");
         const fechaInput = document.getElementById("fecha");
 
         window.crearOActualizarRegistro = function () {
             const nombre = nombreInput.value;
             const apellido = apellidoInput.value;
-            const cedula = cedulaInput.value;
-            const email = emailInput.value;
+            const celular = celularInput.value;
+            const estadocivil = estadocivilInput.value;
             const fecha = fechaInput.value;
 
-            if (nombre && apellido && cedula && email && fecha) {
-                const cedulaExistente = document.getElementById("cedula-existente");
+            if (nombre && apellido && celular && estadocivil && fecha) {
+                const celularExistente = document.getElementById("celular-existente");
 
-                if (cedulaExistente) {
-                    actualizarRegistro(cedulaExistente.value);
+                if (celularExistente) {
+                    actualizarRegistro(celularExistente.value);
                 } else {
                     crearRegistro();
                 }
@@ -86,12 +86,12 @@
 
         function crearRegistro() {
             push(
-                ref(database, 'autos'),
+                ref(database, 'conexion'),
                 {
                     name: nombreInput.value,
                     apellido: apellidoInput.value,
-                    cedula: cedulaInput.value,
-                    email: emailInput.value,
+                    cedula: celularInput.value,
+                    email: estadocivilInput.value,
                     date: fechaInput.value
                 }
             );
@@ -101,11 +101,11 @@
 
         window.actualizarRegistro = function (cedula) {
             const updates = {};
-            updates['/autos/' + cedula] = {
+            updates['/guanoluisa-jandry/' + celular] = {
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
-                cedula: cedulaInput.value,
-                email: emailInput.value,
+                celular: celularInput.value,
+                estadocivil: estadocivilInput.value,
                 date: fechaInput.value
             };
 
@@ -114,13 +114,13 @@
             limpiarFormulario();
         }
 
-        window.eliminarRegistro = function (cedula) {
-            remove(ref(database, 'autos/' + cedula));
+        window.eliminarRegistro = function (celular) {
+            remove(ref(database, 'conexion/' + celular));
 
             limpiarFormulario();
         }
 
-        onValue(ref(database, 'autos'), (snapshot) => {
+        onValue(ref(database, 'guanoluisa-jandry'), (snapshot) => {
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = "";
 
@@ -130,37 +130,37 @@
                 row.innerHTML = `
                     <td>${data.name}</td>
                     <td>${data.apellido}</td>
-                    <td>${data.cedula}</td>
-                    <td>${data.email}</td>
+                    <td>${data.celular}</td>
+                    <td>${data.estadocivil}</td>
                     <td>${data.date}</td>
                     <td>
-                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.cedula}', '${data.email}', '${data.date}')">Actualizar</button>
-                        <button onclick="eliminarRegistro('${data.cedula}')">Eliminar</button>
+                        <button onclick="llenarFormulario('${data.name}', '${data.apellido}', '${data.celular}', '${data.estadocivil}', '${data.date}')">Actualizar</button>
+                        <button onclick="eliminarRegistro('${data.celular}')">Eliminar</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
         });
 
-        window.llenarFormulario = function (nombre, apellido, cedula, email, fecha) {
+        window.llenarFormulario = function (nombre, apellido, celular, estadocivil, fecha) {
             nombreInput.value = nombre;
             apellidoInput.value = apellido;
-            cedulaInput.value = cedula;
-            emailInput.value = email;
+            celularInput.value = celular;
+            estadocivilInput.value = estadocivil;
             fechaInput.value = fecha;
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
             crearButton.textContent = "Actualizar";
             crearButton.onclick = function () {
-                actualizarRegistro(cedula);
+                actualizarRegistro(celular);
             };
         }
 
         function limpiarFormulario() {
             nombreInput.value = "";
             apellidoInput.value = "";
-            cedulaInput.value = "";
-            emailInput.value = "";
+            celularInput.value = "";
+            estadocivilInput.value = "";
             fechaInput.value = "";
 
             const crearButton = document.querySelector("button[onclick='crearOActualizarRegistro()']");
