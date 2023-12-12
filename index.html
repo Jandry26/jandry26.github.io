@@ -101,7 +101,7 @@
 
         window.actualizarRegistro = function (celular) {
             const updates = {};
-            updates['/guanoluisa-jandry/' + celular] = {
+            updates['/guanoluisa/' + celular] = {
                 name: nombreInput.value,
                 apellido: apellidoInput.value,
                 celular: celularInput.value,
@@ -115,12 +115,12 @@
         }
 
         window.eliminarRegistro = function (celular) {
-            remove(ref(database, 'conexion/' + celular));
+            remove(ref(database, 'guanoluisa/' + celular));
 
             limpiarFormulario();
         }
 
-        onValue(ref(database, 'guanoluisa-jandry'), (snapshot) => {
+        onValue(ref(database, 'guanoluisa'), (snapshot) => {
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = "";
 
